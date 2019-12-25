@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import NewSingleComponent from "../news/news-single-component";
+import NewSingleComponent from "./news-single.component";
+import ErrorComponent from "../error/error.component";
 
 class NewsComponent extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      news: []
+      news: [],
+      error: false
     };
   }
 
@@ -18,13 +20,17 @@ class NewsComponent extends Component {
       .then(data => {
         this.setState({ news: data.articles });
       })
-      .catch(e => console.log(e));
+      .catch(e => this.setState({ error: true }));
   }
 
   renderItems() {
-    return this.state.news.map((item, i) => (
-      <NewSingleComponent key={i} item={item}></NewSingleComponent>
-    ));
+    if (!this.state.error) {
+      return this.state.news.map((item, i) => (
+        <NewSingleComponent key={i} item={item}></NewSingleComponent>
+      ));
+    } else {
+      return <ErrorComponent />;
+    }
   }
 
   render() {
