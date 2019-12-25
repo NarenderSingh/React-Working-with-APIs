@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import NewComponent from "../news/news-component";
+import NewsComponent from "../news/news-component";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <NewComponent />
+        <NewsComponent />
       </div>
     );
   }
